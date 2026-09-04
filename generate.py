@@ -245,7 +245,7 @@ def maybe_email(subject, rows, tone, vix, lede):
     user, pw = os.environ.get("GMAIL_USER"), os.environ.get("GMAIL_APP_PASSWORD")
     if not (user and pw):
         return
-    to = os.environ.get("GMAIL_TO", user)
+    to = os.environ.get("GMAIL_TO") or user
     lines = [f"SPEC TAPE \u2014 {subject}", f"tone {tone} | VIX {vix}", "", lede, ""]
     for r in rows:
         px = f"{r['price']} {r['chg']}" if r["price"] else ("private" if r.get("priv") else "")
